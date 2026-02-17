@@ -48,6 +48,7 @@ async function loadData() {
         if (error) throw error;
 
         document.getElementById('nama_siswa').value = data.nama_siswa || '';
+        document.getElementById('pesan').value = data.pesan || '';
         document.getElementById('akun_ig').value = data["akun IG"] || '';
         document.getElementById('akun_tiktok').value = data["akun Tiktok"] || '';
         document.getElementById('tanggal_lahir').value = data["tanggal lahir"] || '';
@@ -80,7 +81,7 @@ document.getElementById('editForm').addEventListener('submit', async function(e)
             .from('siswa')
             .update({
                 nama_siswa: nama_siswa,
-                pesan: pesan,
+                "pesan": pesan,
                 "akun IG": akun_ig,
                 "akun Tiktok": akun_tiktok,
                 "tanggal lahir": tanggal_lahir,
