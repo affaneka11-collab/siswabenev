@@ -179,8 +179,9 @@ function resetButton(btn) {
 // Logout
 function logout() {
     localStorage.removeItem('siswaUsername');
-    window.location.href = 'login_siswa.html';
+    window.location.href = 'loginsis.html';
 }
 
 // Load data saat halaman load
+
 window.onload = loadData;
