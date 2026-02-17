@@ -73,15 +73,17 @@ document.getElementById('editForm').addEventListener('submit', async function(e)
     const akun_ig = document.getElementById('akun_ig').value;
     const akun_tiktok = document.getElementById('akun_tiktok').value;
     const tanggal_lahir = document.getElementById('tanggal_lahir').value;
+    const pesan = document.getElementById('pesan').value;
 
     try {
         const { error } = await supabaselokal
             .from('siswa')
             .update({
                 nama_siswa: nama_siswa,
+                pesan: pesan,
                 "akun IG": akun_ig,
                 "akun Tiktok": akun_tiktok,
-                "tanggal lahir": tanggal_lahir
+                "tanggal lahir": tanggal_lahir,
             })
             .eq('username', currentUsername);
 
@@ -185,4 +187,3 @@ function logout() {
 // Load data saat halaman load
 
 window.onload = loadData;
-
