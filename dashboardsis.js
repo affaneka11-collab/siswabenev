@@ -27,7 +27,7 @@ function hideAlert() {
 if (!currentUsername) {
     showAlert('Anda belum login. Redirect ke halaman login.');
     setTimeout(() => {
-        window.location.href = 'login_siswa.html';
+        window.location.href = 'loginsis.html';
     }, 1000);
 }
 
@@ -185,3 +185,4 @@ function logout() {
 // Load data saat halaman load
 
 window.onload = loadData;
+
