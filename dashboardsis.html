@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Siswa - BenevolentClass</title>
+    <link rel="icon" href="img/logo.png" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" href="dashboardsis.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Untuk ikon -->
+</head>
+<body>
+    <header>
+        <nav id="main-nav">
+            <div class="nav-left">
+                <img src="img/logo.png" alt="Logo" class="nav-logo">
+                <span class="nav-text">Dashboard Siswa</span>
+            </div>
+            <div class="nav-right">
+                <a href="index.html">🏠 Kembali ke Main Menu</a>
+                <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="dashboard-container">
+            <h2><i class="fas fa-user-edit"></i> Dashboard Siswa</h2>
+            <p>Selamat datang! Ubah data diri Anda di bawah ini.</p>
+            <div id="loading" class="loading">Memuat data...</div>
+            <form id="editForm" class="fade-in">
+                <div class="form-group">
+                    <label for="nama_siswa"><i class="fas fa-user"></i> Nama Siswa:</label>
+                    <input type="text" id="nama_siswa" required>
+                </div>
+                <div class="form-group">
+                    <label for="akun_ig"><i class="fab fa-instagram"></i> Akun Instagram:</label>
+                    <input type="text" id="akun_ig" placeholder="Contoh: @username">
+                </div>
+                <div class="form-group">
+                    <label for="akun_tiktok"><i class="fab fa-tiktok"></i> Akun TikTok:</label>
+                    <input type="text" id="akun_tiktok" placeholder="Contoh: @username">
+                </div>
+                <div class="form-group">
+                    <label for="tanggal_lahir"><i class="fas fa-calendar-alt"></i> Tanggal Lahir:</label>
+                    <input type="date" id="tanggal_lahir">
+                </div>
+                <button type="submit" class="submit-btn"><i class="fas fa-save"></i> Simpan Perubahan</button>
+            </form>
+
+            <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;">
+
+                        <h3><i class="fas fa-key"></i> Ubah Password</h3>
+            <form id="passwordForm" class="fade-in">
+                <div class="form-group">
+                    <label for="current_password"><i class="fas fa-lock"></i> Password Saat Ini:</label>
+                    <div class="input-container">
+                        <input type="password" id="current_password" required>
+                        <i class="fas fa-eye toggle-password" data-target="current_password"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="new_password"><i class="fas fa-lock"></i> Password Baru:</label>
+                    <div class="input-container">
+                        <input type="password" id="new_password" required>
+                        <i class="fas fa-eye toggle-password" data-target="new_password"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm_password"><i class="fas fa-lock"></i> Konfirmasi Password Baru:</label>
+                    <div class="input-container">
+                        <input type="password" id="confirm_password" required>
+                        <i class="fas fa-eye toggle-password" data-target="confirm_password"></i>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn"><i class="fas fa-save"></i> Ubah Password</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        © 2025 ICT 8 Benevolent <a href="">AffanEkaP</a>
+    </footer>
+
+    <!-- Custom Alert -->
+    <div id="customAlert" class="custom-alert">
+        <div class="alert-content">
+            <span id="alertMessage"></span>
+            <button class="close-alert" onclick="hideAlert()">&times;</button>
+        </div>
+    </div>
+
+    <script src="dashboardsis.js"></script>
+</body>
+</html>
