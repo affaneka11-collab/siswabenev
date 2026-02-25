@@ -1,190 +1,98 @@
-// Inisialisasi Supabase
-const supabaseUrl = 'https://piaycptnvkyahallyysx.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBpYXljcHRudmt5YWhhbGx5eXN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEwMTIyMzcsImV4cCI6MjA4NjU4ODIzN30.ADYwz_gLL7GzsZXOvWTSLNWyaYQurR3fGQdzl7qnEWU';
-const supabaselokal = supabase.createClient(supabaseUrl, supabaseAnonKey);
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Siswa - BenevolentClass</title>
+    <link rel="icon" href="img/logo.png" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" href="styles/dashboardsis.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&amp;display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav id="main-nav">
+            <div class="nav-left">
+                <i class="fas fa-tachometer-alt mr-2"></i>
+                <span class="nav-text">Dashboard Siswa</span>
+            </div>
+            <div class="nav-right">
+                <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="dashboard-container">
+            <h2><i class="fas fa-user-edit"></i> Dashboard Siswa</h2>
+            <p>Selamat datang! Ubah data diri Anda di bawah ini.</p>
+            <div id="loading" class="loading">Memuat data...</div>
+            <form id="editForm" class="fade-in">
+                <div class="form-group">
+                    <label for="nama_siswa"><i class="fas fa-user"></i> Nama Siswa:</label>
+                    <input type="text" id="nama_siswa" required>
+                </div>
+                <div class="form-group">
+                    <label for="pesan"><i class="fas fa-comment"></i> Pesan:</label>
+                    <input type="text" id="pesan" placeholder="Contoh: Hi, aku siswa Negsago!">
+                </div>
+                <div class="form-group">
+                    <label for="akun_ig"><i class="fab fa-instagram"></i> Akun Instagram:</label>
+                    <input type="text" id="akun_ig" placeholder="Contoh: @username">
+                </div>
+                <div class="form-group">
+                    <label for="akun_tiktok"><i class="fab fa-tiktok"></i> Akun TikTok:</label>
+                    <input type="text" id="akun_tiktok" placeholder="Contoh: @username">
+                </div>
+                <div class="form-group">
+                    <label for="tanggal_lahir"><i class="fas fa-calendar-alt"></i> Tanggal Lahir:</label>
+                    <input type="date" id="tanggal_lahir" required>
+                </div>
+                <button type="submit" class="submit-btn"><i class="fas fa-save"></i> Simpan Perubahan</button>
+            </form>
 
-let currentUsername = localStorage.getItem('siswaUsername');
+            <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;">
+            <h3><i class="fas fa-key"></i> Ubah Password</h3>
+            <form id="passwordForm" class="fade-in">
+                <div class="form-group">
+                    <label for="current_password"><i class="fas fa-lock"></i> Password Saat Ini:</label>
+                    <div class="input-container">
+                        <input type="password" id="current_password" required>
+                        <i class="fas fa-eye toggle-password" data-target="current_password"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="new_password"><i class="fas fa-lock"></i> Password Baru:</label>
+                    <div class="input-container">
+                        <input type="password" id="new_password" required>
+                        <i class="fas fa-eye toggle-password" data-target="new_password"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm_password"><i class="fas fa-lock"></i> Konfirmasi Password Baru:</label>
+                    <div class="input-container">
+                        <input type="password" id="confirm_password" required>
+                        <i class="fas fa-eye toggle-password" data-target="confirm_password"></i>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn"><i class="fas fa-save"></i> Ubah Password</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        © 2025 ICT 8 Benevolent <a href="">AffanEkaP</a>
+    </footer>
 
-// Fungsi untuk menampilkan custom alert
-function showAlert(message) {
-    const alertDiv = document.getElementById('customAlert');
-    const alertMessage = document.getElementById('alertMessage');
-    alertMessage.textContent = message;
-    alertDiv.style.display = 'block';
-    // Auto-hide setelah 3 detik
-    setTimeout(() => {
-        hideAlert();
-    }, 3000);
-}
+    <input type="text" style="display: none;" >
 
-// Fungsi untuk menyembunyikan custom alert
-function hideAlert() {
-    const alertDiv = document.getElementById('customAlert');
-    alertDiv.style.display = 'none';
-}
+    <div id="customAlert" class="custom-alert">
+        <div class="alert-content">
+            <span id="alertMessage"></span>
+            <button class="close-alert" onclick="hideAlert()">&times;</button>
+        </div>
+    </div>
+    <script src="script/db/var/npm/js/dashboardsis.js"></script>
+</body>
 
-// Cek login
-if (!currentUsername) {
-    showAlert('Anda belum login. Redirect ke halaman login.');
-    setTimeout(() => {
-        window.location.href = 'loginsis.html';
-    }, 1000);
-}
-
-// Fetch data siswa
-async function loadData() {
-    const loading = document.getElementById('loading');
-    const form = document.getElementById('editForm');
-    loading.style.display = 'block';
-    form.style.display = 'none';
-
-    try {
-        const { data, error } = await supabaselokal
-            .from('siswa')
-            .select('*')
-            .eq('username', currentUsername)
-            .single();
-
-        if (error) throw error;
-
-        document.getElementById('nama_siswa').value = data.nama_siswa || '';
-        document.getElementById('pesan').value = data.pesan || '';
-        document.getElementById('akun_ig').value = data["akun IG"] || '';
-        document.getElementById('akun_tiktok').value = data["akun Tiktok"] || '';
-        document.getElementById('tanggal_lahir').value = data["tanggal lahir"] || '';
-
-        loading.style.display = 'none';
-        form.style.display = 'block';
-    } catch (error) {
-        console.error('Error loading data:', error);
-        showAlert('Gagal memuat data. Silakan coba lagi.');
-        loading.style.display = 'none';
-    }
-}
-
-// Update data profil
-document.getElementById('editForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const submitBtn = document.querySelector('#editForm .submit-btn');
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan...';
-    submitBtn.disabled = true;
-
-    const nama_siswa = document.getElementById('nama_siswa').value;
-    const akun_ig = document.getElementById('akun_ig').value;
-    const akun_tiktok = document.getElementById('akun_tiktok').value;
-    const tanggal_lahir = document.getElementById('tanggal_lahir').value;
-    const pesan = document.getElementById('pesan').value;
-
-    try {
-        const { error } = await supabaselokal
-            .from('siswa')
-            .update({
-                nama_siswa: nama_siswa,
-                "pesan": pesan,
-                "akun IG": akun_ig,
-                "akun Tiktok": akun_tiktok,
-                "tanggal lahir": tanggal_lahir,
-            })
-            .eq('username', currentUsername);
-
-        if (error) throw error;
-
-        showAlert('Data berhasil diperbarui!');
-        submitBtn.innerHTML = '<i class="fas fa-save"></i> Simpan Perubahan';
-        submitBtn.disabled = false;
-    } catch (error) {
-        console.error('Error updating data:', error);
-        showAlert('Gagal memperbarui data. Silakan coba lagi.');
-        submitBtn.innerHTML = '<i class="fas fa-save"></i> Simpan Perubahan';
-        submitBtn.disabled = false;
-    }
-});
-
-// Update password
-document.getElementById('passwordForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const currentPassword = document.getElementById('current_password').value;
-    const newPassword = document.getElementById('new_password').value;
-    const confirmPassword = document.getElementById('confirm_password').value;
-    const submitBtn = document.querySelector('#passwordForm .submit-btn');
-
-    // Validasi
-    if (newPassword.length < 8) {
-        showAlert('Password baru harus minimal 8 karakter!');
-        return;
-    }
-    if (newPassword !== confirmPassword) {
-        showAlert('Konfirmasi password tidak cocok!');
-        return;
-    }
-
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengubah...';
-    submitBtn.disabled = true;
-
-    try {
-        // Fetch current password untuk verifikasi
-        const { data, error: fetchError } = await supabaselokal
-            .from('siswa')
-            .select('password')
-            .eq('username', currentUsername)
-            .single();
-
-        if (fetchError) throw fetchError;
-
-        if (currentPassword !== data.password) {
-            showAlert('Password saat ini salah!');
-            resetButton(submitBtn);
-            return;
-        }
-
-        // Update password
-        const { error: updateError } = await supabaselokal
-            .from('siswa')
-            .update({ password: newPassword })
-            .eq('username', currentUsername);
-
-        if (updateError) throw updateError;
-
-        showAlert('Password berhasil diubah!');
-        document.getElementById('passwordForm').reset();
-        resetButton(submitBtn);
-    } catch (error) {
-        console.error('Error updating password:', error);
-        showAlert('Gagal mengubah password. Silakan coba lagi.');
-        resetButton(submitBtn);
-    }
-});
-// Toggle show/hide password
-document.querySelectorAll('.toggle-password').forEach(icon => {
-    icon.addEventListener('click', function() {
-        const targetId = this.getAttribute('data-target');
-        const input = document.getElementById(targetId);
-        if (input.type === 'password') {
-            input.type = 'text';
-            this.classList.remove('fa-eye');
-            this.classList.add('fa-eye-slash');
-        } else {
-            input.type = 'password';
-            this.classList.remove('fa-eye-slash');
-            this.classList.add('fa-eye');
-        }
-    });
-});
-
-// Fungsi untuk reset button
-function resetButton(btn) {
-    btn.innerHTML = '<i class="fas fa-save"></i> Ubah Password';
-    btn.disabled = false;
-}
-
-// Logout
-function logout() {
-    localStorage.removeItem('siswaUsername');
-    window.location.href = 'loginsis.html';
-}
-
-// Load data saat halaman load
-
-window.onload = loadData;
+</html>
