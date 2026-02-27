@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Siswa - BenevolentClass</title>
     <link rel="icon" href="img/logo.png" type="image/gif" sizes="16x16">
-    <link rel="stylesheet" href="dashboardsis.css">
+    <link rel="stylesheet" href="styles/dashboardsis.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Untuk ikon -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&amp;display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <nav id="main-nav">
             <div class="nav-left">
-                <img src="img/logo.png" alt="Logo" class="nav-logo">
+                <i class="fas fa-tachometer-alt mr-2"></i>
                 <span class="nav-text">Dashboard Siswa</span>
             </div>
             <div class="nav-right">
@@ -33,7 +35,7 @@
                 </div>
                 <div class="form-group">
                     <label for="pesan"><i class="fas fa-comment"></i> Pesan:</label>
-                    <input type="text" id="pesan" placeholder="Contoh: Hi, aku siswa Negsago!" required>
+                    <input type="text" id="pesan" placeholder="Contoh: Hi, aku siswa Negsago!">
                 </div>
                 <div class="form-group">
                     <label for="akun_ig"><i class="fab fa-instagram"></i> Akun Instagram:</label>
@@ -45,14 +47,13 @@
                 </div>
                 <div class="form-group">
                     <label for="tanggal_lahir"><i class="fas fa-calendar-alt"></i> Tanggal Lahir:</label>
-                    <input type="date" id="tanggal_lahir">
+                    <input type="date" id="tanggal_lahir" required>
                 </div>
                 <button type="submit" class="submit-btn"><i class="fas fa-save"></i> Simpan Perubahan</button>
             </form>
 
             <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;">
-
-                        <h3><i class="fas fa-key"></i> Ubah Password</h3>
+            <h3><i class="fas fa-key"></i> Ubah Password</h3>
             <form id="passwordForm" class="fade-in">
                 <div class="form-group">
                     <label for="current_password"><i class="fas fa-lock"></i> Password Saat Ini:</label>
@@ -83,15 +84,15 @@
         © 2025 ICT 8 Benevolent <a href="">AffanEkaP</a>
     </footer>
 
-    <!-- Custom Alert -->
+    <input type="text" style="display: none;" >
+
     <div id="customAlert" class="custom-alert">
         <div class="alert-content">
             <span id="alertMessage"></span>
             <button class="close-alert" onclick="hideAlert()">&times;</button>
         </div>
     </div>
-
-    <script src="dashboardsis.js"></script>
+    <script src="script/db/var/npm/js/dashboardsis.js"></script>
 </body>
 
 </html>
